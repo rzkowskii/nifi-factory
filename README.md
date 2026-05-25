@@ -1,6 +1,6 @@
 # NiFi Factory
 
-Free Apache NiFi course for data engineers who want production patterns, public labs, and flow designs that hold up under load.
+Free Apache NiFi course for data engineers who want practical flow patterns, public labs, and examples they can check against expected output.
 
 [Start the course on the official site](https://nififactory.com/)
 
@@ -8,9 +8,9 @@ Free Apache NiFi course for data engineers who want production patterns, public 
 
 ## How It Works
 
-NiFi Factory teaches Apache NiFi through 15 focused chapters and 58 lessons. Each chapter explains a production data-flow pattern, shows the processor and relationship choices that matter, then closes with a capstone lab and expected outputs you can compare against.
+NiFi Factory teaches Apache NiFi through 15 focused chapters and 58 lessons. Each chapter explains a data-flow pattern, shows the processor and relationship choices that matter, then ends with a lab and expected output you can compare against.
 
-The course is built for self-paced practice: read the pattern, inspect the flow shape, run the learner-safe lab material, and use the rubrics to check whether the design holds up in production.
+The course is self-paced: read the pattern, inspect the flow, run the public lab files, and compare your output with the rubric.
 
 ## Screenshots And Proof Points
 
@@ -29,4 +29,4 @@ The course is built for self-paced practice: read the pattern, inspect the flow 
 
 ## Source Boundary
 
-This repo is the public GitHub landing page for the official site. It contains only static promo files and public-safe screenshots; no source code is published here.
+This repo is the public GitHub landing page for the official site. It contains only static promo files and public screenshots; no source code is published here.
