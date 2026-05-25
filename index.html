@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NiFi Factory - Apache NiFi Course</title>
+    <meta name="description" content="NiFi Factory is a free Apache NiFi course for production data-flow patterns, public labs, and defensible flow design.">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="canonical" href="https://nififactory.com/">
+    <meta property="og:title" content="NiFi Factory">
+    <meta property="og:description" content="Free Apache NiFi course for production data-flow patterns, public labs, and defensible flow design.">
+    <meta property="og:url" content="https://nififactory.com/">
+    <meta property="og:type" content="website">
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #070b0a;
+        --panel: #101613;
+        --panel-2: #141c18;
+        --text: #e5f1e9;
+        --muted: #9bad9f;
+        --faint: #667569;
+        --rule: #26342d;
+        --green: #6ee7a8;
+        --amber: #f6c96a;
+        --blue: #79c7ff;
+        --pink: #f49ac2;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background:
+          linear-gradient(rgba(110, 231, 168, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(110, 231, 168, 0.03) 1px, transparent 1px),
+          var(--bg);
+        background-size: 28px 28px;
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .shell {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 26px 0 18px;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .brand {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .nav-link {
+        color: var(--green);
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+        gap: 38px;
+        align-items: center;
+        padding: 70px 0 54px;
+      }
+
+      .eyebrow,
+      .label,
+      .kicker {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        color: var(--green);
+        font-size: 13px;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        margin: 14px 0 18px;
+        max-width: 780px;
+        font-size: clamp(42px, 7vw, 82px);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .lede {
+        margin: 0;
+        max-width: 660px;
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 18px;
+        border: 1px solid var(--green);
+        background: var(--green);
+        color: #06100b;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--green);
+      }
+
+      .terminal {
+        border: 1px solid var(--rule);
+        background: rgba(16, 22, 19, 0.86);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
+      }
+
+      .terminal-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--rule);
+        color: var(--faint);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 12px;
+      }
+
+      .terminal img {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        object-position: top left;
+      }
+
+      main {
+        padding-bottom: 70px;
+      }
+
+      .facts {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1px;
+        border: 1px solid var(--rule);
+        background: var(--rule);
+      }
+
+      .fact {
+        min-height: 118px;
+        padding: 20px;
+        background: var(--panel);
+      }
+
+      .fact strong {
+        display: block;
+        margin-top: 8px;
+        color: var(--text);
+        font-size: 24px;
+        line-height: 1.15;
+      }
+
+      .section {
+        padding-top: 64px;
+      }
+
+      .section h2 {
+        margin: 0 0 14px;
+        font-size: 30px;
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      .section > p {
+        margin: 0;
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .step {
+        border: 1px solid var(--rule);
+        background: var(--panel);
+        padding: 18px;
+        min-height: 190px;
+      }
+
+      .step h3 {
+        margin: 12px 0 8px;
+        font-size: 17px;
+        letter-spacing: 0;
+      }
+
+      .step p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      figure {
+        margin: 0;
+        border: 1px solid var(--rule);
+        background: var(--panel);
+      }
+
+      figure img {
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+        object-position: top left;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      figcaption {
+        padding: 14px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .boundary {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: 18px;
+        align-items: start;
+        margin-top: 34px;
+        padding: 22px;
+        border: 1px solid var(--rule);
+        background: var(--panel-2);
+      }
+
+      .boundary p,
+      .boundary ul {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .boundary ul {
+        padding-left: 18px;
+      }
+
+      footer {
+        padding: 32px 0 46px;
+        border-top: 1px solid var(--rule);
+        color: var(--faint);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 12px;
+      }
+
+      @media (max-width: 860px) {
+        .shell {
+          width: min(100% - 28px, 1120px);
+        }
+
+        .hero,
+        .boundary {
+          grid-template-columns: 1fr;
+        }
+
+        .facts,
+        .steps,
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding-top: 46px;
+        }
+
+        nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="shell" aria-label="Primary">
+        <span class="brand">nifi-factory</span>
+        <a class="nav-link" href="https://nififactory.com/">official site</a>
+      </nav>
+    </header>
+
+    <section class="shell hero">
+      <div>
+        <div class="eyebrow">free apache nifi course</div>
+        <h1>NiFi Factory</h1>
+        <p class="lede">Production-pattern lessons, learner-safe labs, and practical review rubrics for designing Apache NiFi flows that are easier to explain, test, and operate.</p>
+        <div class="actions">
+          <a class="button" href="https://nififactory.com/">Start the course</a>
+          <a class="button secondary" href="https://nififactory.com/course">View chapters</a>
+        </div>
+      </div>
+      <div class="terminal" aria-label="NiFi Factory homepage screenshot">
+        <div class="terminal-head">
+          <span>/course/free</span>
+          <span>public preview</span>
+        </div>
+        <img src="screenshots/home.png" alt="NiFi Factory homepage showing the course overview and terminal-inspired interface">
+      </div>
+    </section>
+
+    <main class="shell">
+      <section class="facts" aria-label="Product facts">
+        <div class="fact">
+          <span class="label">chapters</span>
+          <strong>15</strong>
+        </div>
+        <div class="fact">
+          <span class="label">lessons</span>
+          <strong>58</strong>
+        </div>
+        <div class="fact">
+          <span class="label">access</span>
+          <strong>free</strong>
+        </div>
+        <div class="fact">
+          <span class="label">focus</span>
+          <strong>Apache NiFi</strong>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="kicker">how it works</div>
+        <h2>Learn the pattern, then prove the flow shape.</h2>
+        <p>NiFi Factory pairs concise lessons with capstone-style practice. The course emphasizes routing, records, backpressure, failure lanes, controller services, and the operational evidence needed to trust a flow.</p>
+        <div class="steps">
+          <article class="step">
+            <span class="label">01</span>
+            <h3>Pick a chapter</h3>
+            <p>Start with foundations or jump into records, routing, sources, sinks, APIs, Kafka, reliability, platform operations, or security.</p>
+          </article>
+          <article class="step">
+            <span class="label">02</span>
+            <h3>Study the flow</h3>
+            <p>Read the processor choices, relationship wiring, and failure boundaries behind the production pattern.</p>
+          </article>
+          <article class="step">
+            <span class="label">03</span>
+            <h3>Run the lab</h3>
+            <p>Use learner-safe fixtures, expected outputs, and lab notes to practice the flow without private infrastructure.</p>
+          </article>
+          <article class="step">
+            <span class="label">04</span>
+            <h3>Review the proof</h3>
+            <p>Compare outputs and rubrics so the design is explainable, repeatable, and ready for operational review.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="kicker">product surfaces</div>
+        <h2>Public course, labs, and reference material.</h2>
+        <p>These are real screenshots from the live product site. They are included here only as public-safe promotional assets.</p>
+        <div class="gallery">
+          <figure>
+            <img src="screenshots/course.png" alt="NiFi Factory course chapter list">
+            <figcaption>Course map with 15 chapters and 58 public lessons.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/lesson-records.png" alt="NiFi Factory schema-aware records capstone lesson">
+            <figcaption>Record-oriented capstone material with setup, wiring, expected outputs, and review criteria.</figcaption>
+          </figure>
+          <figure>
+            <img src="screenshots/resources.png" alt="NiFi Factory processor reference page">
+            <figcaption>Processor reference for lookup while designing flow patterns.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="kicker">source boundary</div>
+        <h2>This repo is a public pointer, not the product source.</h2>
+        <div class="boundary">
+          <p>The NiFi Factory source code, build system, private configs, internal docs, and deployment machinery are not published here. This GitHub repository exists only to point visitors to the official product site.</p>
+          <ul>
+            <li>Official site: <a href="https://nififactory.com/">nififactory.com</a></li>
+            <li>No source code or build files</li>
+            <li>No private configs, secrets, or internal evidence bundles</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell">NiFi Factory promotional stub. Canonical product site: https://nififactory.com/</div>
+    </footer>
+  </body>
+</html>
